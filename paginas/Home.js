@@ -1,52 +1,59 @@
-import React,{useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,TouchableOpacity, Alert } from 'react-native';
-import {visualizarContatos} from './ContatoModel';
-import { FlatList } from 'react-native-web';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert } from 'react-native';
+import {visualizarTodosContatos} from './ContatoModel';
 
-export default function Home() {
-const [dadosContatos, setDadosContatos] = useState([]);
+
+export default function Home({navigation}) {
+ const [dadosContatos, setDadosContatos] = useState([]);
  
-async function buscarContatos() {
+  async function buscarContatos({}) {
 
-  const resultado = await visualizarTodosContatos(id);
-  if(resultado){
+   const resultado = await visualizarTodosContatos(id);
+   if(resultado){
     setDadosContatos(resultado);
-  }else{
+   }else{
     Alert.alert('Sem contatos');
     setDadosContatos('');
-  }
-}
+   }
+ }
 
-useEffect(async ()=>{
-  const rest = await buscarContatos();
-  setDadosContatos(resp);
-},[])
+ useEffect(async ()=> {
+    const resp = await buscarContatos();
+    setDadosContatos(resp);
+ }, [])
+
+
+
   return (
-    <View style={styles.container}>
+    <View style={estilo.container}>
       <Text>Contatos</Text>
 
-      <TouchableOpacity styles={estilo.botaoCadastrar}>
-        <text style={estilo.botaoTextoCadastrar}>Cadastrar Contatos</text>
+      <TouchableOpacity styles={estilo.botaoCadastrar} onPress={()=>navigation.navigate('Cadastro')}>
+        <Text style={estilo.botaoTextoCadastrar}>Cadastrar Contatos</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
       <FlatList
-      data={}
-      keyExtrator={dadosContatos => dadosContatos.id}
-      renderItem={({item})=>
-  <TouchableOpacity style={estilo.botaoDados} >
-    <Text style={estilo.botaoTextoDados}>{item.id}</Text>
-    <Text style={estilo.botaoTextoDados}>{item.nome}</Text>
-    <Text style={estilo.botaoTextoDados}>{item.fone}</Text>
-    <Text style={estilo.botaoTextoDados}>{item.email}</Text>
-  </TouchableOpacity>
-  }
-  />
+        data= {dadosContatos}
+        keyExtrator={dadosContatos => dadosContatos.id}
+        renderItem= {({item})=>
+          <TouchableOpacity style={estilo.botaoDados} >
+            <Text style={estilo.botaoTextoDados}>{item.id}</Text>
+            <Text style={estilo.botaoTextoDados}>{item.nome}</Text>
+            <Text style={estilo.botaoTextoDados}>{item.fone}</Text>
+            <Text style={estilo.botaoTextoDados}>{item.email}</Text>
+          </TouchableOpacity>
+        }
+      />
+
+
     </View>
+
   );
 }
+    
 
-const styles = StyleSheet.create({
+const estilo = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

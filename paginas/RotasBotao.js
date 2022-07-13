@@ -13,7 +13,7 @@ export default function RotasBotao() {
         <NavigationContainer>
             <nav.Navigator>
                 <nav.Screen name="Home" component={Home} />
-                <nav.Screen name="Cadastro" component={Cadastro}/>
+                <nav.Screen name="Cadastro" component={Cadastro} />
             </nav.Navigator>
         </NavigationContainer>
     );
