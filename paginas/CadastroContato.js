@@ -8,16 +8,16 @@ export default function CadastrarContato({navigation}) {
 
     return (
         <View style={estilo.container}>
-            <TextInput style={estilo.container}
-                placeholder='Digite o código do Contato'
+            <TextInput style={estilo.campoTexto}
+                placeholder='Digite o Nome do Contato'
             />
 
-            <TextInput style={estilo.container}
-                placeholder='Digite o código do Contato'
+            <TextInput style={estilo.campoTexto}
+                placeholder='Digite o Fone do Contato'
             />
 
-            <TextInput style={estilo.container}
-                placeholder='Digite o código do Contato'
+            <TextInput style={estilo.campoTexto}
+                placeholder='Digite o E-mail do Contato'
             />
 
             <TouchableOpacity style={estilo.botao}>
@@ -32,14 +32,17 @@ export default function CadastrarContato({navigation}) {
 const estilo = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor:"#6A5ACD"
+        backgroundColor:"#D2691E",
 
     },
     campoTexto:{
-        backgroundColor:"#f5355",
+        flex:0,
+        backgroundColor:"#F5DEB3",
+        borderRadius: 10,
     },
     botao:{
-        backgroundColor:"#000080",
+        backgroundColor:"#F4A460",
+        borderRadius: 10,
     },
     textBotao:{
         fontSize:30

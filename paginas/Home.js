@@ -5,44 +5,37 @@ import {visualizarTodosContatos} from './ContatoModel';
 
 
 export default function Home({navigation}) {
+  
  const [dadosContatos, setDadosContatos] = useState([]);
  
-  async function buscarContatos({}) {
-
-   const resultado = await visualizarTodosContatos(id);
-   if(resultado){
-    setDadosContatos(resultado);
-   }else{
-    Alert.alert('Sem contatos');
-    setDadosContatos('');
-   }
- }
-
- useEffect(async ()=> {
-    const resp = await buscarContatos();
+  
+  useEffect(async ()=> {
+    const resp = await visualizarTodosContatos();
     setDadosContatos(resp);
- }, [])
+  }, []);
 
 
 
   return (
     <View style={estilo.container}>
-      <Text>Contatos</Text>
+      <Text style={estilo.titulo}>Contatos</Text>
 
       <TouchableOpacity styles={estilo.botaoCadastrar} onPress={()=>navigation.navigate('Cadastro')}>
         <Text style={estilo.botaoTextoCadastrar}>Cadastrar Contatos</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
       <FlatList
-        data= {dadosContatos}
+        data={dadosContatos}
         keyExtrator={dadosContatos => dadosContatos.id}
         renderItem= {({item})=>
-          <TouchableOpacity style={estilo.botaoDados} >
+            <View style={estilo.container}>
             <Text style={estilo.botaoTextoDados}>{item.id}</Text>
-            <Text style={estilo.botaoTextoDados}>{item.nome}</Text>
-            <Text style={estilo.botaoTextoDados}>{item.fone}</Text>
-            <Text style={estilo.botaoTextoDados}>{item.email}</Text>
-          </TouchableOpacity>
+            <Text style={estilo.botaoTextoDados}>{item.Nome}</Text>
+            <Text style={estilo.botaoTextoDados}>{item.Fone}</Text>
+            <Text style={estilo.botaoTextoDados}>{item.Email}</Text>
+            </View>
+          
+        
         }
       />
 
@@ -60,23 +53,29 @@ const estilo = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  titulo:{
+    fontSize: 40,
+
+  },
   botaoCadastrar:{
-    backgroundColor: '#2a9d8f',
+    backgroundColor: 'black',
     margin: 20,
     padding: 10,
     borderRadius: 10,
   },
   botaoTextoCadastrar:{
-    fontSize: 30
+    backgroundColor:'#F4A460',
+    fontSize: 30,
+    borderRadius: 10
+
   },
   botaoDados:{
-    backgroundColor: '#2a9d8f',
+    backgroundColor: '#000000',
     margin: 20,
     padding: 10,
     borderRadius: 10,
   },
   botaoTextoDados:{
-    fontSize: 30
-
+    fontSize: 20,
   }
 });

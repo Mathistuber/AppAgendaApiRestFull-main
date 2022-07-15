@@ -2,7 +2,7 @@ import Api from './Api';
 
 export async function visualizarTodosContatos(){
     try {
-        const resultados = await Api.get(`/contatos/`);
+        const resultados = await Api.get(`/contatos`);
         return resultados.data;
     } catch (error) {
         console.log(error);
